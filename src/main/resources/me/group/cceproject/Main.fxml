@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="700.0" style="-fx-background-color: #db383d;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.MainController">
+   <children>
+      <ImageView fitHeight="430.0" fitWidth="443.0" layoutX="129.0" layoutY="-81.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logo_transparent.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="39.0" layoutY="338.0" onMouseClicked="#dineinClick" prefHeight="262.0" prefWidth="249.0" style="-fx-background-radius: 15; -fx-background-color: #FFFFFF;">
+         <children>
+            <Label layoutX="85.0" layoutY="14.0" text="Dine-In">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="174.0" fitWidth="176.0" layoutX="38.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/burgerlogo.png" />
+               </image>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane layoutX="402.0" layoutY="338.0" onMouseClicked="#takeoutClick" prefHeight="262.0" prefWidth="242.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+         <children>
+            <Label layoutX="71.0" layoutY="14.0" text="Take-Out">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="185.0" fitWidth="201.0" layoutX="29.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/takeout.png" />
+               </image>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <Label layoutX="332.0" layoutY="443.0" text="or" textFill="#f4eeee">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="277.0" layoutY="260.0" text="Choose One" textFill="#f4eeee">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</Pane>
