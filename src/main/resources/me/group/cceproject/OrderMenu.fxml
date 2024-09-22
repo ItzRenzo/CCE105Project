@@ -1,34 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="700.0" style="-fx-background-color: #db383d;" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.OrderMenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="700.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.OrderMenuController">
    <children>
-      <AnchorPane layoutY="600.0" prefHeight="120.0" prefWidth="700.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane prefHeight="604.0" prefWidth="139.0" style="-fx-background-color: #08ff49; -fx-background-radius: 10;">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Your Order">
+            <AnchorPane layoutX="24.0" layoutY="155.0" prefHeight="62.0" prefWidth="105.0" />
+            <AnchorPane layoutX="-9.0" layoutY="218.0" prefHeight="42.0" prefWidth="126.0">
+               <children>
+                  <Label layoutX="45.0" layoutY="3.0" onMouseClicked="#IfBurgersClicked" text="Burgers">
+                     <font>
+                        <Font name="Century Gothic Bold" size="20.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="5.0" layoutY="341.0" prefHeight="62.0" prefWidth="144.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="18.0" text=" Beef Steak">
+                     <font>
+                        <Font name="Century Gothic Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <ImageView fitHeight="152.0" fitWidth="150.0" layoutX="-2.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo_transparent.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="5.0" layoutY="289.0" text="Chicken Wings">
                <font>
-                  <Font name="System Bold" size="24.0" />
+                  <Font name="Century Gothic Bold" size="20.0" />
                </font>
-            </Label>
-            <Label fx:id="orderTypeLabel" layoutX="150.0" layoutY="14.0" prefHeight="35.0" prefWidth="370.0">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="275.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="160.0" layoutY="207.0" textFill="#00b14f">
+         <font>
+            <Font name="Century Gothic Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="497.0" layoutY="207.0" textFill="#00b14f">
+         <font>
+            <Font name="Century Gothic Bold" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="189.0" fitWidth="554.0" layoutX="149.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/logo_transparent.png" />
+            <Image url="@images/sales.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutY="97.0" prefHeight="474.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
-      <AnchorPane layoutX="175.0" layoutY="97.0" prefHeight="474.0" prefWidth="529.0" style="-fx-background-color: #ffffff;" />
+      <Label layoutX="160.0" layoutY="256.0">
+         <font>
+            <Font name="Century Gothic Bold" size="23.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="160.0" layoutY="322.0">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="233.0" fitWidth="249.0" layoutX="160.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/discount.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="233.0" fitWidth="271.0" layoutX="424.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/fries.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

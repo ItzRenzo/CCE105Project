@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="598.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.BurgerController">
+   <children>
+      <ImageView fitHeight="119.0" fitWidth="186.0" layoutX="14.0" layoutY="113.0" onMouseClicked="#KenBurgerClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/yumburger.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="14.0" layoutY="88.0" text="Ken Burger Solo">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="333.0" layoutY="88.0" text="Ken Cheese Burger">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="124.0" fitWidth="183.0" layoutX="332.0" layoutY="115.0" onMouseClicked="#CheeseBurgerClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/cheesyburger.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="124.0" fitWidth="160.0" layoutX="27.0" layoutY="281.0" onMouseClicked="#WhopperClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/whopper.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="14.0" layoutY="256.0" text="Ken Whopper Burger">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="157.0" layoutY="351.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/plus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="157.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/plus.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="473.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/plus.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="14.0" layoutY="218.0" text="₱80">
+         <font>
+            <Font name="Century Gothic Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="392.0" text="₱200">
+         <font>
+            <Font name="Century Gothic Bold" size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="333.0" layoutY="219.0" text="₱150">
+         <font>
+            <Font name="Century Gothic Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="213.0" layoutY="14.0" text="Burgers" textFill="#00b14f">
+         <font>
+            <Font name="Century Gothic Bold" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="384.0" layoutY="313.0" text="USE CODE &quot;WENTUCKY!!&quot; For 10% OFF" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic Bold" size="11.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="131.0" fitWidth="222.0" layoutX="-3.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logo_transparent.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
