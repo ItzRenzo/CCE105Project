@@ -1,5 +1,40 @@
-.backgroundColor{
-    -fx-background-color: linear-gradient(to right,#FF0000, #990000);
+.backgroundColor {
+    -fx-background-color: linear-gradient(to right, #FF0000, #990000);
+}
+
+/* Option 1: White background
+.customScrollPane {
+    -fx-background-color: white;
+    -fx-background: white;
+}
+*/
+/* Option 2: Transparent background */
+
+.customScrollPane {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
 }
 
 
+/* Additional styles to ensure transparency or white background */
+.customScrollPane > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Optional: Style the scroll bars */
+.customScrollPane .scroll-bar:vertical,
+.customScrollPane .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.customScrollPane .increment-button,
+.customScrollPane .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.customScrollPane .scroll-bar:vertical .thumb,
+.customScrollPane .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-background-radius: 5em;
+}
