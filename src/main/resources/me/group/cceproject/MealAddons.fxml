@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="700.0" styleClass="backgroundColor" stylesheets="@AllColors.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="700.0" styleClass="backgroundColor" stylesheets="@AllColors.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.MealAddonsController">
    <children>
       <AnchorPane layoutX="25.0" layoutY="29.0" prefHeight="195.0" prefWidth="650.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;">
          <children>
