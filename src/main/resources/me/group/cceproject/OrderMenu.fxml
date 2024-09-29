@@ -18,22 +18,99 @@
       </ImageView>
       <AnchorPane layoutX="23.0" layoutY="124.0" prefHeight="410.0" prefWidth="154.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
          <children>
-            <ScrollPane layoutX="6.0" layoutY="7.0" prefHeight="398.0" prefWidth="142.0" styleClass="customScrollPane">
+            <ScrollPane layoutX="6.0" layoutY="6.0" prefHeight="398.0" prefWidth="142.0" styleClass="customScrollPane">
                <content>
-                  <VBox prefHeight="549.0" prefWidth="122.0" />
+                  <VBox prefHeight="549.0" prefWidth="122.0">
+                     <children>
+                        <AnchorPane fx:id="BurgerCategory" onMouseClicked="#BurgerCategoryClicked" prefHeight="106.0" prefWidth="122.0">
+                           <children>
+                              <ImageView fitHeight="75.0" fitWidth="119.0" layoutX="5.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/yumburger.png" />
+                                 </image>
+                              </ImageView>
+                              <Text layoutX="37.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Burgers">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="ChickenWingsCategory" onMouseClicked="#ChickenWingsCategoryClicked" prefHeight="106.0" prefWidth="122.0">
+                           <children>
+                              <ImageView fitHeight="77.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Sweet__Spicy.png" />
+                                 </image>
+                              </ImageView>
+                              <Text layoutX="13.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Chicken Wings">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                     </children></VBox>
                </content>
             </ScrollPane>
          </children></AnchorPane>
-      <AnchorPane layoutX="196.0" layoutY="124.0" prefHeight="410.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+      <AnchorPane fx:id="BurgerPane" layoutX="196.0" layoutY="124.0" prefHeight="410.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
          <children>
-            <ScrollPane layoutX="5.0" layoutY="5.0" prefHeight="397.0" prefWidth="470.0" styleClass="customScrollPane">
-               <content>
-                  <VBox prefHeight="634.0" prefWidth="446.0" style="-fx-background-color: #FFFFFF;" />
-               </content>
-            </ScrollPane>
+            <AnchorPane fx:id="B1" layoutX="24.0" layoutY="24.0" onMouseClicked="#B1Clicked" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;">
+               <children>
+                  <ImageView fitHeight="85.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/yumburger.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="25.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Yumburger">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="46.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱ 99">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="180.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
+            <AnchorPane layoutX="329.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="25.0" layoutY="549.0" prefHeight="164.0" prefWidth="650.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" />
+      <AnchorPane fx:id="ChickenWingsPane" layoutX="196.0" layoutY="124.0" prefHeight="410.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; visibility: false;">
+         <children>
+            <AnchorPane fx:id="C1" layoutX="24.0" layoutY="24.0" onMouseClicked="#C1Clicked" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;">
+               <children>
+                  <ImageView fitHeight="74.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Sweet__Spicy.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="29.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spicy CW">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="43.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱ 159">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children></AnchorPane>
+            <AnchorPane layoutX="180.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
+            <AnchorPane layoutX="329.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="25.0" layoutY="549.0" prefHeight="164.0" prefWidth="650.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+         <children>
+            <Text fx:id="orderTypeLabel" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Order:">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
       <Text fill="WHITE" layoutX="279.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your order">
          <font>
             <Font name="System Bold" size="36.0" />
