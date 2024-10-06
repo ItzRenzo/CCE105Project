@@ -18,13 +18,13 @@
                   <Font name="System Bold" size="32.0" />
                </font>
             </Text>
-            <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="33.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
-            <Text layoutX="190.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Name">
+            <ImageView fx:id="MealPicture" fitHeight="120.0" fitWidth="120.0" layoutX="33.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
+            <Text fx:id="MealName" layoutX="190.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Name">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Text layoutX="190.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Price">
+            <Text fx:id="MealPrice" layoutX="190.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Meal Price">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <AnchorPane layoutX="14.0" layoutY="48.0" prefHeight="100.0" prefWidth="100.0">
+            <AnchorPane fx:id="CokePane" layoutX="14.0" layoutY="48.0" onMouseClicked="#CokeClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: #DB383D; -fx-border-width: 2; -fx-border-radius: 5;">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="17.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -52,14 +52,14 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Button layoutX="88.0" layoutY="168.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #DB383D; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Small" textFill="WHITE">
+            <Button fx:id="SmallButton" layoutX="88.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#SmallButtonClicked" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #DB383D; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Small" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="221.0" layoutY="170.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Medium" />
-            <Button layoutX="357.0" layoutY="170.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Large" />
-            <AnchorPane layoutX="118.0" layoutY="48.0" prefHeight="100.0" prefWidth="100.0">
+            <Button fx:id="MediumButton" layoutX="221.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#MediumButtonClicked" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Medium" />
+            <Button fx:id="LargeButton" layoutX="357.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#LargeButtonClicked" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Large" />
+            <AnchorPane fx:id="SpritePane" layoutX="118.0" layoutY="48.0" onMouseClicked="#SpriteClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -68,7 +68,7 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="223.0" layoutY="48.0" prefHeight="100.0" prefWidth="100.0">
+            <AnchorPane fx:id="MtnDewPane" layoutX="223.0" layoutY="48.0" onMouseClicked="#MtnDewClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -86,7 +86,7 @@
                   <Font name="System Bold" size="32.0" />
                </font>
             </Text>
-            <AnchorPane layoutX="14.0" layoutY="47.0" prefHeight="100.0" prefWidth="100.0">
+            <AnchorPane fx:id="ChocolateFudgePane" layoutX="14.0" layoutY="47.0" onMouseClicked="#CFClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -103,7 +103,7 @@
             <Button layoutX="90.0" layoutY="160.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="-" />
             <Button layoutX="194.0" layoutY="160.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="+" />
             <TextField fx:id="QuantityNumber" alignment="CENTER" layoutX="120.0" layoutY="160.0" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: DB383D; -fx-border-radius: 5;" text="1" />
-            <AnchorPane layoutX="120.0" layoutY="47.0" prefHeight="100.0" prefWidth="100.0">
+            <AnchorPane fx:id="ChocolatePiePane" layoutX="120.0" layoutY="47.0" onMouseClicked="#CPClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -112,11 +112,20 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="225.0" layoutY="44.0" prefHeight="100.0" prefWidth="100.0">
+            <AnchorPane fx:id="RedVelvetPane" layoutX="225.0" layoutY="44.0" onMouseClicked="#RVClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/redvelvet.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="NoThanksPane" layoutX="325.0" layoutY="44.0" onMouseClicked="#NTClicked" prefHeight="100.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="90.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/nothanks.png" />
                      </image>
                   </ImageView>
                </children>
