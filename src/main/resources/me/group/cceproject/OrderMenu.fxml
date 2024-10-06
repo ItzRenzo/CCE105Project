@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -111,9 +113,18 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
-            <ScrollPane layoutX="2.0" layoutY="31.0" prefHeight="130.0" prefWidth="650.0" styleClass="customScrollPane">
+            <ScrollPane layoutX="2.0" layoutY="31.0" prefHeight="130.0" prefWidth="644.0" styleClass="customScrollPane">
                <content>
-                  <HBox prefHeight="110.0" prefWidth="760.0" />
+                  <TableView fx:id="OrderTable" prefHeight="128.0" prefWidth="642.0" stylesheets="@AllColors.css">
+                    <columns>
+                      <TableColumn fx:id="MealNameTable" editable="false" minWidth="75.0" prefWidth="500.0" resizable="false" text="Meal Name" />
+                      <TableColumn fx:id="MealPriceTable" maxWidth="50000.0" prefWidth="140.0" resizable="false" text="Price" />
+                    </columns>
+                     <styleClass>
+                        <String fx:value="table-view" />
+                        <String fx:value="column-header-background" />
+                     </styleClass>
+                  </TableView>
                </content>
             </ScrollPane>
          </children></AnchorPane>
@@ -133,7 +144,7 @@
       </AnchorPane>
       <AnchorPane layoutX="481.0" layoutY="722.0" prefHeight="45.0" prefWidth="194.0" style="-fx-border-color: #FFFFFF; -fx-border-width: 3; -fx-border-radius: 5;">
          <children>
-            <Text fill="WHITE" layoutX="21.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: ₱ 1000.00">
+            <Text fx:id="TotalPriceText" fill="WHITE" layoutX="5.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total: ₱ 0.00" textAlignment="CENTER" wrappingWidth="183.20004882812498">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
