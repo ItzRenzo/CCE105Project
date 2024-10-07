@@ -198,4 +198,20 @@ public class OrderMenuController {
             System.err.println("Error setting meal details: " + e.getMessage());
         }
     }
+
+    @FXML
+    private void PayforOrderClicked(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/PayOrder.fxml"));
+            Parent payOrderRoot = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene payOrderScene = new Scene(payOrderRoot);
+            stage.setScene(payOrderScene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error returning to pay order menu: " + e.getMessage());
+        }
+    }
 }
