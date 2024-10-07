@@ -42,7 +42,7 @@ public class OrderMenuController {
     @FXML
     private Text TotalPriceText;
 
-    private static ObservableList<OrderItem> staticOrderItems;
+    static ObservableList<OrderItem> staticOrderItems;
 
     private static OrderMenuController instance;
 
@@ -90,12 +90,12 @@ public class OrderMenuController {
     }
 
     // Static method to add order item
-    public static void addOrderItem(String mealName, String mealPrice) {
-        System.out.println("Adding order item: " + mealName + " - " + mealPrice);
+    public static void addOrderItem(String mealName, String mealPrice, String foodCode) {
+        System.out.println("Adding order item: " + mealName + " - " + mealPrice + " - " + foodCode);
         if (staticOrderItems == null) {
             staticOrderItems = FXCollections.observableArrayList();
         }
-        staticOrderItems.add(new OrderItem(mealName, mealPrice));
+        staticOrderItems.add(new OrderItem(mealName, mealPrice, foodCode));
     }
 
     // Update total price
@@ -155,8 +155,9 @@ public class OrderMenuController {
         String mealName = "Yumburger";
         String mealPrice = "₱ 99";
         String imagePath = "B1.png";
+        String foodCode = "B1";
 
-        loadMealAddons(mealName, mealPrice, imagePath, event);
+        loadMealAddons(mealName, mealPrice, imagePath, foodCode, event);
     }
 
     // Chicken Wings Category
@@ -165,37 +166,29 @@ public class OrderMenuController {
     public void C1Clicked(MouseEvent event) {
         String mealName = "Spicy Chicken Wings";
         String mealPrice = "₱ 159";
-        String imagePath = "Sweet__Spicy.png";
+        String imagePath = "C1.png";
+        String foodCode = "C1";
 
-        loadMealAddons(mealName, mealPrice, imagePath, event);
+        loadMealAddons(mealName, mealPrice, imagePath, foodCode, event);
     }
 
-    private void loadMealAddons(String mealName, String mealPrice, String imagePath, MouseEvent event) {
+    private void loadMealAddons(String mealName, String mealPrice, String imagePath, String foodCode, MouseEvent event) {
         try {
-            // Load MealAddons.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/MealAddons.fxml"));
             Parent mealAddonsRoot = loader.load();
 
-            // Get the MealAddonsController
             MealAddonsController mealAddonsController = loader.getController();
+            // Pass the foodCode along with other details
+            mealAddonsController.setMealDetails(mealName, mealPrice, imagePath, foodCode);
 
-            // Pass meal details to MealAddonsController
-            mealAddonsController.setMealDetails(mealName, mealPrice, imagePath);
-
-            // Switch scene
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene mealAddonsScene = new Scene(mealAddonsRoot);
             stage.setScene(mealAddonsScene);
             stage.show();
 
-            System.out.println("Meal Addons loaded successfully.");
-
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Error loading MealAddons.fxml: " + e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println("Error setting meal details: " + e.getMessage());
         }
     }
 
@@ -212,6 +205,22 @@ public class OrderMenuController {
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error returning to pay order menu: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void ViewCartClicked(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/ShoppingCart.fxml"));
+            Parent shopCartRoot = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene shopCartScene = new Scene(shopCartRoot);
+            stage.setScene(shopCartScene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error going to shopping cart: " + e.getMessage());
         }
     }
 }

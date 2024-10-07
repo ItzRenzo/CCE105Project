@@ -13,8 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class MealAddonsController {
 
     // Drink Panes
@@ -64,6 +62,8 @@ public class MealAddonsController {
     @FXML
     private Button CancelButton;
 
+    private String foodCode;
+
     // Styles for drink panes
     private final String selectedPaneStyle = "-fx-border-color: #DB383D; -fx-border-width: 2; -fx-border-radius: 5;";
     private final String defaultPaneStyle = ""; // Default style for deselected panes
@@ -83,8 +83,9 @@ public class MealAddonsController {
         SmallButton.setStyle(selectedButtonStyle);
     }
 
-    public void setMealDetails(String mealName, String mealPrice, String imagePath) {
-        // Set the meal name and price
+    public void setMealDetails(String mealName, String mealPrice, String imagePath, String foodCode) {
+        // Store the foodCode
+        this.foodCode = foodCode;
         MealName.setText(mealName);
         MealPrice.setText(mealPrice);
 
@@ -211,7 +212,7 @@ public class MealAddonsController {
             String formattedPrice = String.format("₱ %.2f", finalPrice);
 
             // Add to the order table
-            OrderMenuController.addOrderItem(completeMealName, formattedPrice);
+            OrderMenuController.addOrderItem(completeMealName, formattedPrice, foodCode);
             System.out.println("Order added: " + completeMealName + " - " + formattedPrice);
 
             // Load back the OrderMenu.fxml

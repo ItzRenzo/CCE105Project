@@ -12,10 +12,12 @@ public class PayOrderController {
 
     @FXML
     private void PayCounterClicked(MouseEvent event) {
+
     }
 
     @FXML
     private void PayCardClicked(MouseEvent event) {
+
     }
 
     @FXML
