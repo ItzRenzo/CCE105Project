@@ -42,7 +42,7 @@ public class OrderMenuController {
     @FXML
     private Text TotalPriceText;
 
-    private static ObservableList<OrderItem> staticOrderItems;
+    static ObservableList<OrderItem> staticOrderItems;
 
     private static OrderMenuController instance;
 
@@ -212,6 +212,22 @@ public class OrderMenuController {
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error returning to pay order menu: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void ViewCartClicked(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/ShoppingCart.fxml"));
+            Parent shopCartRoot = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene shopCartScene = new Scene(shopCartRoot);
+            stage.setScene(shopCartScene);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error going to shopping cart: " + e.getMessage());
         }
     }
 }

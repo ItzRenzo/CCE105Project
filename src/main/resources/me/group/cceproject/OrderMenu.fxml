@@ -127,6 +127,20 @@
                   </TableView>
                </content>
             </ScrollPane>
+            <AnchorPane fx:id="ViewCart" layoutX="546.0" layoutY="5.0" onMouseClicked="#ViewCartClicked" prefHeight="25.0" prefWidth="99.0" style="-fx-border-color: #000000; -fx-border-radius: 3;">
+               <children>
+                  <ImageView fitHeight="19.0" fitWidth="17.0" layoutX="75.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/search.png" />
+                     </image>
+                  </ImageView>
+                  <Text layoutX="13.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View Cart">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
          </children></AnchorPane>
       <Text fill="WHITE" layoutX="279.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your order">
          <font>
