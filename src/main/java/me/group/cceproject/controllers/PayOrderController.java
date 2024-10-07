@@ -8,26 +8,44 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class PayOrderController {
 
     @FXML
     private void PayCounterClicked(MouseEvent event) {
-
+        PaymentType("PayCounter", event);
     }
 
     @FXML
     private void PayCardClicked(MouseEvent event) {
+        PaymentType("PayCard", event);
+    }
 
+    private void PaymentType(String paymentType, MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/End.fxml"));
+            Parent endRoot = loader.load();
+
+            EndController endController = loader.getController();
+            endController.setPaymentType(paymentType);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene endScene = new Scene(endRoot);
+            stage.setScene(endScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading End.fxml: " + e.getMessage());
+        }
     }
 
     @FXML
     private void BackClicked(MouseEvent event) {
         try {
-            // Load back the OrderMenu.fxml
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/OrderMenu.fxml"));
             Parent orderMenuRoot = loader.load();
 
-            // Get the controller and set the order type
             OrderMenuController controller = loader.getController();
             controller.setOrderType(OrderMenuController.getOrderType());
 

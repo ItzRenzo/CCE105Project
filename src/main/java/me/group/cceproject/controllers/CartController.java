@@ -85,20 +85,17 @@ public class CartController {
         VBox centerSection = new VBox(10);
         centerSection.setAlignment(Pos.CENTER_LEFT);
 
-        // Quantity controls with label
         HBox quantityBox = new HBox(10);
         quantityBox.setAlignment(Pos.CENTER_LEFT);
 
-        // Add "Quantity:" label
         Text quantityLabel = new Text("Quantity:");
-        quantityLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
+        quantityLabel.setStyle("-fx-font-size: 14px;");
 
-        // Create HBox for just the controls
         HBox controlsBox = new HBox(5);
         controlsBox.setAlignment(Pos.CENTER_LEFT);
 
         Button decreaseBtn = new Button("-");
-        Text quantityText = new Text("1");
+        Text quantityText = new Text(String.valueOf(item.getQuantity()));
         Button increaseBtn = new Button("+");
 
         // Style the quantity controls
@@ -158,7 +155,12 @@ public class CartController {
     private void updateQuantity(Text quantityText, int change, OrderItem item) {
         int currentQuantity = Integer.parseInt(quantityText.getText());
         int newQuantity = Math.max(1, currentQuantity + change);
+
+        // Update both the display and the OrderItem
         quantityText.setText(String.valueOf(newQuantity));
+        item.setQuantity(newQuantity);
+
+        // Update total price
         updateTotalPrice();
     }
 
@@ -172,7 +174,9 @@ public class CartController {
         double total = 0.0;
         for (OrderItem item : OrderMenuController.staticOrderItems) {
             String priceStr = item.getMealPrice().replaceAll("[^\\d.]", "");
-            total += Double.parseDouble(priceStr);
+            double itemPrice = Double.parseDouble(priceStr);
+            // Multiply by quantity
+            total += itemPrice * item.getQuantity();
         }
         totalPriceText.setText(String.format("₱ %.2f", total));
     }

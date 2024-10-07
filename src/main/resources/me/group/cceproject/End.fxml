@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="781.0" prefWidth="700.0" styleClass="backgroundColor" stylesheets="@AllColors.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.EndController">
+   <children>
+      <ImageView fitHeight="354.0" fitWidth="361.0" layoutX="173.0" layoutY="-59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logo_transparent.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="237.0" layoutY="689.0" onMouseClicked="#CreateOrderClicked" prefHeight="45.0" prefWidth="225.0" style="-fx-background-radius: 5; -fx-background-color: #FFFFFF;">
+         <children>
+            <Label layoutX="28.0" layoutY="7.0" text="Create New Order">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane layoutX="27.0" layoutY="206.0" prefHeight="450.0" prefWidth="646.0" style="-fx-background-color: #FFFFFF; -fx-border-color: red; -fx-border-radius: 15; -fx-background-radius: 15;">
+         <children>
+            <Text layoutX="228.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thank you!">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Text>
+            <Text layoutX="178.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOUR ORDER NUMBER IS">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <Text fx:id="OrderNumber" layoutX="294.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0000">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="OrderImage" fitHeight="168.0" fitWidth="196.0" layoutX="239.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/counter.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="Reminder" layoutX="218.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pay for your order&#10;at the cashier" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+</Pane>

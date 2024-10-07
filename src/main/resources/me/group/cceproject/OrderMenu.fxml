@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -117,8 +118,13 @@
                <content>
                   <TableView fx:id="OrderTable" prefHeight="128.0" prefWidth="642.0" stylesheets="@AllColors.css">
                     <columns>
-                      <TableColumn fx:id="MealNameTable" editable="false" minWidth="75.0" prefWidth="500.0" resizable="false" text="Meal Name" />
+                      <TableColumn fx:id="MealNameTable" editable="false" minWidth="75.0" prefWidth="400.0" resizable="false" text="Meal Name" />
                       <TableColumn fx:id="MealPriceTable" maxWidth="50000.0" prefWidth="140.0" resizable="false" text="Price" />
+                       <TableColumn fx:id="QuantityTable" prefWidth="100.0" text="Quantity">
+                          <cellValueFactory>
+                             <PropertyValueFactory property="quantity" />
+                          </cellValueFactory>
+                       </TableColumn>
                     </columns>
                      <styleClass>
                         <String fx:value="table-view" />

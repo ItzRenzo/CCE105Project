@@ -40,6 +40,9 @@ public class OrderMenuController {
     private TableColumn<OrderItem, String> MealPriceTable;
 
     @FXML
+    private TableColumn<OrderItem, Integer> QuantityTable;
+
+    @FXML
     private Text TotalPriceText;
 
     static ObservableList<OrderItem> staticOrderItems;
@@ -54,6 +57,7 @@ public class OrderMenuController {
         // Set up the table columns
         MealNameTable.setCellValueFactory(new PropertyValueFactory<>("mealName"));
         MealPriceTable.setCellValueFactory(new PropertyValueFactory<>("mealPrice"));
+        QuantityTable.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
         // Store instance for access from MealAddonsController
         instance = this;
@@ -98,23 +102,17 @@ public class OrderMenuController {
         staticOrderItems.add(new OrderItem(mealName, mealPrice, foodCode));
     }
 
-    // Update total price
     private void updateTotalPrice() {
         double total = 0.0;
         for (OrderItem item : staticOrderItems) {
-            // Extract numeric value from price string (e.g., "₱ 99" -> 99.0)
             String priceStr = item.getMealPrice().replaceAll("[^\\d.]", "");
-            try {
-                total += Double.parseDouble(priceStr);
-            } catch (NumberFormatException e) {
-                System.err.println("Error parsing price: " + item.getMealPrice());
-            }
+            double itemPrice = Double.parseDouble(priceStr);
+            total += itemPrice * item.getQuantity();
         }
-        // Update the total price text
-        TotalPriceText.setText(String.format("Total: ₱ %.2f", total));
+        TotalPriceText.setText(String.format("₱ %.2f", total));
     }
 
-        public static OrderMenuController getInstance() {
+    public static OrderMenuController getInstance() {
         return instance;
     }
 
