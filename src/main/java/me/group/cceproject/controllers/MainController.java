@@ -21,7 +21,29 @@ public class MainController {
     private void takeoutClick(MouseEvent event) {
         loadOrderMenu("Take Out", event);
     }
+    @FXML
+    private void logoclicked(MouseEvent event){
+        try {
+            // Load the FXML file for the login panel
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/AdminPanel.fxml"));
+            Parent loginPanelRoot = loader.load();
 
+            // Get the current stage from the event source
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Create a new scene for the login panel
+            Scene loginPanelScene = new Scene(loginPanelRoot);
+
+            // Set the new scene and show it
+            stage.setScene(loginPanelScene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading LoginPanel.fxml: " + e.getMessage());
+        }
+
+
+    }
     private void loadOrderMenu(String orderType, MouseEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/OrderMenu.fxml"));

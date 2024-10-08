@@ -221,4 +221,8 @@ public class OrderMenuController {
             System.err.println("Error going to shopping cart: " + e.getMessage());
         }
     }
+
+    public void setAdminType(String adminType) {
+
+    }
 }
