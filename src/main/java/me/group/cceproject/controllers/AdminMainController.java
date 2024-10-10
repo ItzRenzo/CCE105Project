@@ -1,5 +1,7 @@
 package me.group.cceproject.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -10,16 +12,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class AdminMainController {
 
-    private Queue<OrderSummary> orderQueue = new LinkedList<>();
-
     @FXML
     private TextField inputOrderNumber;
+
+    @FXML
+    private TextField OrderNumberInput;
 
     @FXML
     private Text orderTotalText;
@@ -54,75 +55,95 @@ public class AdminMainController {
     @FXML
     private TableColumn<OrderSummary, String> orderStatusColumn;
 
+    @FXML
+    private TableView<OrderItem> OrdersTable;
+    @FXML
+    private TableColumn<OrderItem, String> ProductID;
+    @FXML
+    private TableColumn<OrderItem, String> OrderName;
+    @FXML
+    private TableColumn<OrderItem, String> OrderPrice;
+    @FXML
+    private TableColumn<OrderItem, Integer> OrderQuantity;
+
     private static final String ORDER_FILE = "orders.txt";
+
+    // Queue for order processing
+    private Queue<OrderSummary> orderQueue = new LinkedList<>();
+
+    // Map to store stacks of OrderItems for each order
+    private Map<String, Stack<OrderItem>> orderStacks = new HashMap<>();
 
     @FXML
     public void initialize() {
-        // Bind the columns to the OrderSummary properties
+        // Set up the order summary columns
         orderNumberColumn.setCellValueFactory(cellData -> cellData.getValue().orderNumberProperty());
         orderTotalColumn.setCellValueFactory(cellData -> cellData.getValue().orderTotalProperty());
         orderStatusColumn.setCellValueFactory(cellData -> cellData.getValue().orderStatusProperty());
 
-        // Populate the ComboBox with status options
+        // Set up the order details columns
+        ProductID.setCellValueFactory(cellData -> cellData.getValue().foodCodeProperty());
+        OrderName.setCellValueFactory(cellData -> cellData.getValue().mealNameProperty());
+        OrderPrice.setCellValueFactory(cellData -> cellData.getValue().mealPriceProperty());
+        OrderQuantity.setCellValueFactory(cellData -> cellData.getValue().quantityProperty().asObject());
+
         orderStatusComboBox.getItems().addAll("Pending", "In Progress", "Completed");
+        OrderNumberInput.setOnAction(event -> handleOrderNumberInput());
 
-        // Set an event handler for when the user presses Enter on the inputOrderNumber field
-        inputOrderNumber.setOnAction(event -> loadOrderDetails());
-
-        // Load existing orders into the TableView
         loadOrders();
     }
 
     private void loadOrders() {
+        ObservableList<OrderSummary> orders = FXCollections.observableArrayList();
         try {
             List<String> lines = Files.readAllLines(Paths.get(ORDER_FILE));
             OrderSummary currentOrder = null;
+            Stack<OrderItem> currentStack = null;
 
             for (String line : lines) {
-                line = line.trim();  // Trim whitespace for consistency
+                line = line.trim();
+                if (line.isEmpty()) continue;
 
                 if (line.matches("\\d{4}: Order Items")) {
-                    // If there is an order in progress, add it to the list and queue
-                    if (currentOrder != null) {
-                        orderTableView.getItems().add(currentOrder);
-                        orderQueue.add(currentOrder);  // Enqueue the order
+                    if (currentOrder != null && currentStack != null) {
+                        orders.add(currentOrder);
+                        orderQueue.offer(currentOrder);  // Add to queue
+                        orderStacks.put(currentOrder.getOrderNumber(), currentStack);
                     }
-                    // Start a new order summary with the order number
                     String orderNumber = line.split(":")[0];
                     currentOrder = new OrderSummary(orderNumber);
-                } else if (line.startsWith("Total Price:")) {
-                    if (currentOrder != null) {
-                        currentOrder.setOrderTotal(line.substring(12).trim());  // Extract total price
+                    currentStack = new Stack<>();
+                } else if (line.startsWith("Food Code:")) {
+                    OrderItem item = new OrderItem("", "", line.substring(10).trim(), 0);
+                    if (currentStack != null) {
+                        currentStack.push(item);  // Add items to stack
                     }
-                } else if (line.startsWith("Status:")) {
-                    if (currentOrder != null) {
-                        currentOrder.setOrderStatus(line.substring(7).trim());  // Extract order status
-                    }
+                } else if (line.startsWith("Meal Name:") && !currentStack.isEmpty()) {
+                    currentStack.peek().setMealName(line.substring(10).trim());
+                } else if (line.startsWith("Price:") && !currentStack.isEmpty()) {
+                    currentStack.peek().setMealPrice(line.substring(6).trim());
+                } else if (line.startsWith("Quantity:") && !currentStack.isEmpty()) {
+                    currentStack.peek().setQuantity(Integer.parseInt(line.substring(9).trim()));
+                } else if (line.startsWith("Total Price:") && currentOrder != null) {
+                    currentOrder.setOrderTotal(line.substring(12).trim());
+                } else if (line.startsWith("Status:") && currentOrder != null) {
+                    currentOrder.setOrderStatus(line.substring(7).trim());
                 }
             }
 
-            // Add the last order to the list and queue
-            if (currentOrder != null) {
-                orderTableView.getItems().add(currentOrder);
-                orderQueue.add(currentOrder);  // Enqueue the order
+            // Add the last order
+            if (currentOrder != null && currentStack != null) {
+                orders.add(currentOrder);
+                orderQueue.offer(currentOrder);
+                orderStacks.put(currentOrder.getOrderNumber(), currentStack);
             }
 
+            orderTableView.setItems(orders);
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert("Error", "Failed to load orders: " + e.getMessage());
         }
     }
-
-    @FXML
-    private void processNextOrder() {
-        if (!orderQueue.isEmpty()) {
-            OrderSummary nextOrder = orderQueue.poll();  // Dequeue the first order
-            System.out.println("Processing order: " + nextOrder.getOrderNumber());
-            // Perform processing, such as updating its status
-        } else {
-            System.out.println("No more orders in the queue.");
-        }
-    }
-
 
     // Load the order details (total price and status) when an order number is entered
     private void loadOrderDetails() {
@@ -153,52 +174,109 @@ public class AdminMainController {
         String newStatus = orderStatusComboBox.getValue();
 
         if (orderNumberInput.isEmpty() || newStatus == null) {
-            System.out.println("Order number or new status not selected.");
+            showAlert("Error", "Order number or new status not selected");
             return;
         }
 
-        // Iterate through the queue to find and update the order
-        for (OrderSummary order : orderQueue) {
+        for (OrderSummary order : orderTableView.getItems()) {
             if (order.getOrderNumber().equals(orderNumberInput)) {
-                // Update the status
                 order.setOrderStatus(newStatus);
-                orderTableView.refresh();  // Refresh the TableView to show the updated status
 
-                // If the new status is "Completed", remove it from both the queue and the TableView
                 if (newStatus.equals("Completed")) {
-                    orderQueue.remove(order);  // Remove from the queue
-                    orderTableView.getItems().remove(order);  // Remove from the TableView
-                    System.out.println("Order " + orderNumberInput + " has been completed and removed.");
+                    orderQueue.remove(order);  // Remove from queue
+                    orderStacks.remove(order.getOrderNumber());  // Remove the stack
+                    orderTableView.getItems().remove(order);
                 }
 
-                // Save changes to file
+                orderTableView.refresh();
                 saveOrdersToFile();
-
-                return;  // Exit once the matching order is found and updated
+                return;
             }
         }
 
-        System.out.println("Order number " + orderNumberInput + " not found.");
+        showAlert("Error", "Order number " + orderNumberInput + " not found");
     }
 
-
-
-
-    // Save the updated orders back to the file
     private void saveOrdersToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ORDER_FILE))) {
             for (OrderSummary order : orderTableView.getItems()) {
-                writer.write(order.getOrderNumber() + ": Order Items");
-                writer.newLine();
-                writer.write("  Total Price: " + order.getOrderTotal());
-                writer.newLine();
-                writer.write("  Status: " + order.getOrderStatus());
-                writer.newLine();
-                writer.newLine();  // Blank line to separate orders
+                writer.write(order.getOrderNumber() + ": Order Items\n");
+
+                Stack<OrderItem> orderStack = orderStacks.get(order.getOrderNumber());
+                if (orderStack != null) {
+                    // Create temporary stack to preserve original order
+                    Stack<OrderItem> tempStack = new Stack<>();
+                    Stack<OrderItem> originalStack = new Stack<>();
+
+                    // Copy items to temp stack (reverses order)
+                    while (!orderStack.isEmpty()) {
+                        tempStack.push(orderStack.pop());
+                    }
+
+                    // Write items and restore original stack
+                    while (!tempStack.isEmpty()) {
+                        OrderItem item = tempStack.pop();
+                        writer.write("  Food Code: " + item.getFoodCode() + "\n");
+                        writer.write("  Meal Name: " + item.getMealName() + "\n");
+                        writer.write("  Price: " + item.getMealPrice() + "\n");
+                        writer.write("  Quantity: " + item.getQuantity() + "\n");
+                        orderStack.push(item);
+                        originalStack.push(item);
+                    }
+
+                    // Restore original stack order
+                    orderStack.clear();
+                    while (!originalStack.isEmpty()) {
+                        orderStack.push(originalStack.pop());
+                    }
+                }
+
+                writer.write("  Total Price: " + order.getOrderTotal() + "\n");
+                writer.write("  Status: " + order.getOrderStatus() + "\n\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
+            showAlert("Error", "Failed to save orders: " + e.getMessage());
         }
+    }
+
+    @FXML
+    private void handleOrderNumberInput() {
+        String orderNumber = OrderNumberInput.getText().trim();
+        if (orderNumber.isEmpty()) {
+            showAlert("Error", "Please enter an order number");
+            return;
+        }
+
+        Stack<OrderItem> orderStack = orderStacks.get(orderNumber);
+        if (orderStack != null && OrdersTable != null) {
+            // Convert stack to ObservableList while maintaining order
+            ObservableList<OrderItem> orderItems = FXCollections.observableArrayList();
+            Stack<OrderItem> tempStack = new Stack<>();
+
+            // Reverse the stack to display items in original order
+            while (!orderStack.isEmpty()) {
+                tempStack.push(orderStack.pop());
+            }
+
+            // Add items to observable list and restore the original stack
+            while (!tempStack.isEmpty()) {
+                OrderItem item = tempStack.pop();
+                orderItems.add(item);
+                orderStack.push(item);
+            }
+
+            OrdersTable.setItems(orderItems);
+        } else {
+            showAlert("Information", "No items found for order number: " + orderNumber);
+        }
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     @FXML

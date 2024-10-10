@@ -1,41 +1,47 @@
 package me.group.cceproject.controllers;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class OrderItem {
-    private String mealName;
-    private String mealPrice;
-    private String foodCode;
-    private int quantity;  // New property
+    private final SimpleStringProperty mealName;
+    private final SimpleStringProperty mealPrice;
+    private final SimpleStringProperty foodCode;
+    private final SimpleIntegerProperty quantity;
 
-    public OrderItem(String mealName, String mealPrice, String foodCode) {
-        this.mealName = mealName;
-        this.mealPrice = mealPrice;
-        this.foodCode = foodCode;
-        this.quantity = 1;  // Default quantity is 1
+    public OrderItem(String mealName, String mealPrice, String foodCode, int quantity) {
+        this.mealName = new SimpleStringProperty(mealName);
+        this.mealPrice = new SimpleStringProperty(mealPrice);
+        this.foodCode = new SimpleStringProperty(foodCode);
+        this.quantity = new SimpleIntegerProperty(quantity);
     }
 
-    // Add getter and setter for quantity
-    public int getQuantity() {
-        return quantity;
-    }
+    // Getters
+    public String getMealName() { return mealName.get(); }
+    public String getMealPrice() { return mealPrice.get(); }
+    public String getFoodCode() { return foodCode.get(); }
+    public int getQuantity() { return quantity.get(); }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    // Existing getters and setters...
-    public String getMealName() { return mealName; }
-    public String getMealPrice() { return mealPrice; }
-    public String getFoodCode() { return foodCode; }
-
+    // Setters
     public void setMealName(String mealName) {
-        this.mealName = mealName;
+        this.mealName.set(mealName);
     }
 
     public void setMealPrice(String mealPrice) {
-        this.mealPrice = mealPrice;
+        this.mealPrice.set(mealPrice);
     }
 
     public void setFoodCode(String foodCode) {
-        this.foodCode = foodCode;
+        this.foodCode.set(foodCode);
     }
+
+    public void setQuantity(int quantity) {
+        this.quantity.set(quantity);
+    }
+
+    // Property getters
+    public SimpleStringProperty mealNameProperty() { return mealName; }
+    public SimpleStringProperty mealPriceProperty() { return mealPrice; }
+    public SimpleStringProperty foodCodeProperty() { return foodCode; }
+    public SimpleIntegerProperty quantityProperty() { return quantity; }
 }

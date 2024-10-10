@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;  // Import TextField for quantity input
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
@@ -62,6 +63,10 @@ public class MealAddonsController {
     @FXML
     private Button CancelButton;
 
+    // TextField for quantity selection
+    @FXML
+    private TextField QuantityNumber; // Ensure this is defined in your FXML
+
     private String foodCode;
 
     // Styles for drink panes
@@ -105,8 +110,6 @@ public class MealAddonsController {
             e.printStackTrace();
         }
     }
-
-
 
     // Method for drink selection
     @FXML
@@ -191,6 +194,7 @@ public class MealAddonsController {
         // Apply selected style to the clicked button
         selectedButton.setStyle(selectedButtonStyle);
     }
+
     @FXML
     private void AddtoOrderClicked(MouseEvent event) {
         try {
@@ -211,8 +215,17 @@ public class MealAddonsController {
             // Format the final price
             String formattedPrice = String.format("₱ %.2f", finalPrice);
 
+            // Get the quantity from the QuantityNumber text field
+            int quantity = Integer.parseInt(QuantityNumber.getText().trim()); // Ensure valid integer input
+
+            // Validate quantity to ensure it's at least 1
+            if (quantity < 1) {
+                System.err.println("Quantity must be at least 1.");
+                return; // Early return if the quantity is invalid
+            }
+
             // Add to the order table
-            OrderMenuController.addOrderItem(completeMealName, formattedPrice, foodCode);
+            OrderMenuController.addOrderItem(completeMealName, formattedPrice, foodCode, quantity);
             System.out.println("Order added: " + completeMealName + " - " + formattedPrice);
 
             // Load back the OrderMenu.fxml
@@ -228,6 +241,8 @@ public class MealAddonsController {
             stage.setScene(orderMenuScene);
             stage.show();
 
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid quantity input: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error adding order to table: " + e.getMessage());

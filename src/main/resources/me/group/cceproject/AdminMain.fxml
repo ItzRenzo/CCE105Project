@@ -74,7 +74,7 @@
             </Tab>
           <Tab fx:id="OrdersTab" text="Untitled Tab 2">
                <content>
-                  <TableView prefHeight="698.0" prefWidth="586.0">
+                  <TableView prefHeight="698.0" fx:id="OrdersTable" prefWidth="586.0">
                     <columns>
                       <TableColumn fx:id="ProductID" prefWidth="113.59999084472656" text="Product ID" />
                         <TableColumn fx:id="OrderName" editable="false" prefWidth="200.0" text="Order Name" />

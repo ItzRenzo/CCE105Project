@@ -9,10 +9,20 @@
 0004: Order Items
   Food Code: B1
   Meal Name: Yumburger
-Mountain Dew (Small) 
-Red Velvet
   Price: ₱ 158.00
   Quantity: 1
   Total Price: 158.00
+  Status: Pending
+
+0005: Order Items
+  Food Code: B1
+  Meal Name: Yumburger
+  Price: ₱ 158.00
+  Quantity: 2
+  Food Code: B1
+  Meal Name: Yumburger
+  Price: ₱ 148.00
+  Quantity: 3
+  Total Price: 760.00
   Status: Pending
 
