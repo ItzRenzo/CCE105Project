@@ -1,20 +1,12 @@
 0001: Order Items
-  Food Code: B1
-  Meal Name: Yumburger
-Mountain Dew (Small) 
-Chocolate Pie
-  Price: ₱ 148.00
-  Quantity: 1
   Total Price: 148.00
   Status: Pending
 
 0002: Order Items
-  Food Code: B1
-  Meal Name: Yumburger
-Sprite (Small) 
-Chocolate Pie
-  Price: ₱ 148.00
-  Quantity: 1
   Total Price: 148.00
+  Status: Pending
+
+0003: Order Items
+  Total Price: 99.00
   Status: Pending
 
