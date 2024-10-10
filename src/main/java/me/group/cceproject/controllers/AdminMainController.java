@@ -1,7 +1,5 @@
 package me.group.cceproject.controllers;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -12,9 +10,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class AdminMainController {
+
+    private Queue<OrderSummary> orderQueue = new LinkedList<>();
 
     @FXML
     private TextField inputOrderNumber;
@@ -72,8 +74,6 @@ public class AdminMainController {
     }
 
     private void loadOrders() {
-        ObservableList<OrderSummary> orders = FXCollections.observableArrayList();
-
         try {
             List<String> lines = Files.readAllLines(Paths.get(ORDER_FILE));
             OrderSummary currentOrder = null;
@@ -82,9 +82,10 @@ public class AdminMainController {
                 line = line.trim();  // Trim whitespace for consistency
 
                 if (line.matches("\\d{4}: Order Items")) {
-                    // If there is an order in progress, add it to the list
+                    // If there is an order in progress, add it to the list and queue
                     if (currentOrder != null) {
-                        orders.add(currentOrder);
+                        orderTableView.getItems().add(currentOrder);
+                        orderQueue.add(currentOrder);  // Enqueue the order
                     }
                     // Start a new order summary with the order number
                     String orderNumber = line.split(":")[0];
@@ -100,18 +101,28 @@ public class AdminMainController {
                 }
             }
 
-            // Add the last order to the list
+            // Add the last order to the list and queue
             if (currentOrder != null) {
-                orders.add(currentOrder);
+                orderTableView.getItems().add(currentOrder);
+                orderQueue.add(currentOrder);  // Enqueue the order
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // Set the orders in the TableView
-        orderTableView.setItems(orders);
     }
+
+    @FXML
+    private void processNextOrder() {
+        if (!orderQueue.isEmpty()) {
+            OrderSummary nextOrder = orderQueue.poll();  // Dequeue the first order
+            System.out.println("Processing order: " + nextOrder.getOrderNumber());
+            // Perform processing, such as updating its status
+        } else {
+            System.out.println("No more orders in the queue.");
+        }
+    }
+
 
     // Load the order details (total price and status) when an order number is entered
     private void loadOrderDetails() {
@@ -146,25 +157,31 @@ public class AdminMainController {
             return;
         }
 
-        // Find the order and update its status
-        for (OrderSummary order : orderTableView.getItems()) {
+        // Iterate through the queue to find and update the order
+        for (OrderSummary order : orderQueue) {
             if (order.getOrderNumber().equals(orderNumberInput)) {
-                // Update the status and reflect it in the TableView
+                // Update the status
                 order.setOrderStatus(newStatus);
+                orderTableView.refresh();  // Refresh the TableView to show the updated status
 
-                // Refresh the TableView to ensure the changes are shown
-                orderTableView.refresh();
+                // If the new status is "Completed", remove it from both the queue and the TableView
+                if (newStatus.equals("Completed")) {
+                    orderQueue.remove(order);  // Remove from the queue
+                    orderTableView.getItems().remove(order);  // Remove from the TableView
+                    System.out.println("Order " + orderNumberInput + " has been completed and removed.");
+                }
 
                 // Save changes to file
                 saveOrdersToFile();
 
-                System.out.println("Updated order status for " + orderNumberInput + " to " + newStatus);
-                return;
+                return;  // Exit once the matching order is found and updated
             }
         }
 
-        System.out.println("Order number " + orderNumberInput + " not found for updating status.");
+        System.out.println("Order number " + orderNumberInput + " not found.");
     }
+
+
 
 
     // Save the updated orders back to the file

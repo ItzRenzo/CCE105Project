@@ -1,12 +1,18 @@
-0001: Order Items
-  Total Price: 148.00
-  Status: Completed
-
 0002: Order Items
   Total Price: 148.00
-  Status: Pending
+  Status: In Progress
 
 0003: Order Items
   Total Price: 99.00
+  Status: Pending
+
+0004: Order Items
+  Food Code: B1
+  Meal Name: Yumburger
+Mountain Dew (Small) 
+Red Velvet
+  Price: ₱ 158.00
+  Quantity: 1
+  Total Price: 158.00
   Status: Pending
 
