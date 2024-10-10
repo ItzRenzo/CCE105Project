@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
@@ -58,9 +57,9 @@ public class AdminMainController {
     @FXML
     public void initialize() {
         // Bind the columns to the OrderSummary properties
-        orderNumberColumn.setCellValueFactory(new PropertyValueFactory<>("orderNumber"));
-        orderTotalColumn.setCellValueFactory(new PropertyValueFactory<>("orderTotal"));
-        orderStatusColumn.setCellValueFactory(new PropertyValueFactory<>("orderStatus"));
+        orderNumberColumn.setCellValueFactory(cellData -> cellData.getValue().orderNumberProperty());
+        orderTotalColumn.setCellValueFactory(cellData -> cellData.getValue().orderTotalProperty());
+        orderStatusColumn.setCellValueFactory(cellData -> cellData.getValue().orderStatusProperty());
 
         // Populate the ComboBox with status options
         orderStatusComboBox.getItems().addAll("Pending", "In Progress", "Completed");
@@ -150,12 +149,15 @@ public class AdminMainController {
         // Find the order and update its status
         for (OrderSummary order : orderTableView.getItems()) {
             if (order.getOrderNumber().equals(orderNumberInput)) {
-                // Update the status
+                // Update the status and reflect it in the TableView
                 order.setOrderStatus(newStatus);
+
+                // Refresh the TableView to ensure the changes are shown
+                orderTableView.refresh();
+
                 // Save changes to file
                 saveOrdersToFile();
 
-                // Print the update for confirmation
                 System.out.println("Updated order status for " + orderNumberInput + " to " + newStatus);
                 return;
             }
@@ -163,6 +165,7 @@ public class AdminMainController {
 
         System.out.println("Order number " + orderNumberInput + " not found for updating status.");
     }
+
 
     // Save the updated orders back to the file
     private void saveOrdersToFile() {

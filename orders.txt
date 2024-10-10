@@ -1,6 +1,6 @@
 0001: Order Items
   Total Price: 148.00
-  Status: Pending
+  Status: Completed
 
 0002: Order Items
   Total Price: 148.00
