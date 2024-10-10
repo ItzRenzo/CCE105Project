@@ -94,12 +94,12 @@ public class OrderMenuController {
     }
 
     // Static method to add order item
-    public static void addOrderItem(String mealName, String mealPrice, String foodCode) {
+    public static void addOrderItem(String mealName, String mealPrice, String foodCode, int quantity) {
         System.out.println("Adding order item: " + mealName + " - " + mealPrice + " - " + foodCode);
         if (staticOrderItems == null) {
             staticOrderItems = FXCollections.observableArrayList();
         }
-        staticOrderItems.add(new OrderItem(mealName, mealPrice, foodCode));
+        staticOrderItems.add(new OrderItem(mealName, mealPrice, foodCode, quantity));
     }
 
     private void updateTotalPrice() {
