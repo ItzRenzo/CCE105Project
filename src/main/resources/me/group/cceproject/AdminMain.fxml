@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1185.0" styleClass="backgroundColor" stylesheets="@AllColors.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.AdminMainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1185.0" styleClass="backgroundColor" stylesheets="@AllColors.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.group.cceproject.controllers.AdminMainController">
    <children>
       <AnchorPane layoutX="21.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 18;">
          <children>
@@ -156,7 +156,7 @@
                               <Font name="System Bold" size="19.0" />
                            </font>
                         </Label>
-                        <TextField layoutX="106.0" layoutY="480.0" />
+                        <TextField fx:id="AmountTextField" layoutX="106.0" layoutY="480.0" />
                         <Label layoutX="17.0" layoutY="517.0" text="Change:">
                            <font>
                               <Font name="System Bold" size="19.0" />
@@ -177,12 +177,12 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Text fx:id="Total" layoutX="106.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱0.00">
+                        <Text fx:id="TotalText" layoutX="106.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱0.00">
                            <font>
                               <Font name="Century Gothic Bold" size="20.0" />
                            </font>
                         </Text>
-                        <Text fx:id="Change" layoutX="106.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱0.00">
+                        <Text fx:id="ChangeText" layoutX="106.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱0.00">
                            <font>
                               <Font name="Century Gothic Bold" size="20.0" />
                            </font>

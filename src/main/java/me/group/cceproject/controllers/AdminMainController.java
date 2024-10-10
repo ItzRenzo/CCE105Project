@@ -1,6 +1,7 @@
 package me.group.cceproject.controllers;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -23,7 +24,16 @@ public class AdminMainController {
     private TextField OrderNumberInput;
 
     @FXML
+    private TextField AmountTextField;
+
+    @FXML
+    private Text TotalText;
+
+    @FXML
     private Text orderTotalText;
+
+    @FXML
+    private Text ChangeText;
 
     @FXML
     private ComboBox<String> orderStatusComboBox;
@@ -99,6 +109,10 @@ public class AdminMainController {
         // Populate the ComboBox with product IDs
         ObservableList<String> productIds = FXCollections.observableArrayList(productPrices.keySet());
         ProductIDBox.setItems(productIds);
+        OrdersTable.getItems().addListener((ListChangeListener<OrderItem>) change -> updateTotalPrice());
+
+        // Update the total price on startup
+        updateTotalPrice();
         loadOrders();
     }
 
@@ -252,6 +266,7 @@ public class AdminMainController {
     @FXML
     private void handleOrderNumberInput() {
         String orderNumber = OrderNumberInput.getText().trim();
+
         if (orderNumber.isEmpty()) {
             showAlert("Error", "Please enter an order number");
             return;
@@ -276,10 +291,14 @@ public class AdminMainController {
             }
 
             OrdersTable.setItems(orderItems);
+
+            // Now that we've loaded the order items into the OrdersTable, update the total price
+            updateTotalPrice();
         } else {
             showAlert("Information", "No items found for order number: " + orderNumber);
         }
     }
+
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -297,11 +316,9 @@ public class AdminMainController {
             return;
         }
 
-        String productName = "Product Name " + selectedProductID;
         Double productPrice = productPrices.get(selectedProductID);  // Retrieve the actual price
-
-        // Get the quantity from the text field
         int productQuantity;
+
         try {
             productQuantity = Integer.parseInt(QuantityField.getText());
         } catch (NumberFormatException e) {
@@ -309,10 +326,14 @@ public class AdminMainController {
             return;
         }
 
-        OrderItem newItem = new OrderItem(selectedProductID, productName, productPrice.toString(), productQuantity);
+        OrderItem newItem = new OrderItem(selectedProductID, "Product Name " + selectedProductID, productPrice.toString(), productQuantity);
         OrdersTable.getItems().add(newItem);
         OrdersTable.refresh();
+
+        // Call updateTotalPrice to refresh the total value
+        updateTotalPrice();
     }
+
     @FXML
     private void QueueClicked(MouseEvent event) {
         MainTab.getSelectionModel().select(OrderQueueTab);
@@ -325,23 +346,68 @@ public class AdminMainController {
         InputTab.getSelectionModel().select(OrderInput);
     }
 
+    private void updateTotalPrice() {
+        double total = 0.0;
+        for (OrderItem item : OrdersTable.getItems()) {
+            // Get the numeric value of the meal price, removing any non-numeric characters (like ₱)
+            String priceStr = item.getMealPrice().replaceAll("[^\\d.]", "");
+            double itemPrice = Double.parseDouble(priceStr);
+
+            // Calculate the total for this item (price * quantity)
+            total += itemPrice * item.getQuantity();
+        }
+
+        // Update the TotalText to show the new total value
+        TotalText.setText(String.format("₱%.2f", total));
+    }
+
+
+
     @FXML
-    private void PayClicked(MouseEvent event) {}
+    private void PayClicked(MouseEvent event) {
+        // Get the total amount from TotalText
+        String totalTextValue = TotalText.getText().replaceAll("[^\\d.]", "");  // Remove the ₱ symbol and get the number
+        double totalAmount = Double.parseDouble(totalTextValue);
+
+        // Get the amount from the AmountTextField (money given by the customer)
+        String amountGivenText = AmountTextField.getText();
+        if (amountGivenText.isEmpty()) {
+            showAlert("Error", "Please enter the amount given by the customer");
+            return;
+        }
+
+        double amountGiven = Double.parseDouble(amountGivenText);
+
+        // Calculate the change
+        if (amountGiven < totalAmount) {
+            showAlert("Error", "Amount given is less than the total. Please enter a valid amount.");
+            return;
+        }
+
+        double changeAmount = amountGiven - totalAmount;
+
+        // Update the ChangeText with the calculated change
+        ChangeText.setText(String.format("₱%.2f", changeAmount));
+    }
+
 
     @FXML
     private void RecieptClicked(MouseEvent event) {}
 
     @FXML
-    private void RemoveClicked(MouseEvent event) {    OrderItem selectedItem = OrdersTable.getSelectionModel().getSelectedItem();
+    private void RemoveClicked(MouseEvent event) {
+        OrderItem selectedItem = OrdersTable.getSelectionModel().getSelectedItem();
 
         if (selectedItem != null) {
-            // Remove the selected item from the OrdersTable
             OrdersTable.getItems().remove(selectedItem);
+            OrdersTable.refresh();
+            // Call updateTotalPrice to refresh the total value
+            updateTotalPrice();
         } else {
-            // If no item is selected, show an alert
             showAlert("Error", "Please select an item to remove");
         }
     }
+
 
 
 }
