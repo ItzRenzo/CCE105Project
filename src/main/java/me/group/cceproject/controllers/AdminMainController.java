@@ -45,7 +45,8 @@ public class AdminMainController {
 
     @FXML
     private Tab OrderInput;
-
+    @FXML
+    private TextField QuantityField;
     @FXML
     private TableView<OrderSummary> orderTableView;
     @FXML
@@ -54,7 +55,8 @@ public class AdminMainController {
     private TableColumn<OrderSummary, String> orderTotalColumn;
     @FXML
     private TableColumn<OrderSummary, String> orderStatusColumn;
-
+    @FXML
+    private ComboBox<String> ProductIDBox;
     @FXML
     private TableView<OrderItem> OrdersTable;
     @FXML
@@ -89,7 +91,14 @@ public class AdminMainController {
 
         orderStatusComboBox.getItems().addAll("Pending", "In Progress", "Completed");
         OrderNumberInput.setOnAction(event -> handleOrderNumberInput());
+// Example product IDs and prices for demonstration
+        productPrices.put("P001", 100.0);
+        productPrices.put("P002", 150.0);
+        productPrices.put("P003", 200.0);
 
+        // Populate the ComboBox with product IDs
+        ObservableList<String> productIds = FXCollections.observableArrayList(productPrices.keySet());
+        ProductIDBox.setItems(productIds);
         loadOrders();
     }
 
@@ -279,6 +288,31 @@ public class AdminMainController {
         alert.showAndWait();
     }
 
+    private Map<String, Double> productPrices = new HashMap<>();
+    @FXML
+    private void AddClicked(MouseEvent event) {
+        String selectedProductID = ProductIDBox.getSelectionModel().getSelectedItem();
+        if (selectedProductID == null) {
+            showAlert("Error", "Please select a product");
+            return;
+        }
+
+        String productName = "Product Name " + selectedProductID;
+        Double productPrice = productPrices.get(selectedProductID);  // Retrieve the actual price
+
+        // Get the quantity from the text field
+        int productQuantity;
+        try {
+            productQuantity = Integer.parseInt(QuantityField.getText());
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Please enter a valid number for quantity");
+            return;
+        }
+
+        OrderItem newItem = new OrderItem(selectedProductID, productName, productPrice.toString(), productQuantity);
+        OrdersTable.getItems().add(newItem);
+        OrdersTable.refresh();
+    }
     @FXML
     private void QueueClicked(MouseEvent event) {
         MainTab.getSelectionModel().select(OrderQueueTab);
@@ -290,4 +324,24 @@ public class AdminMainController {
         MainTab.getSelectionModel().select(OrdersTab);
         InputTab.getSelectionModel().select(OrderInput);
     }
+
+    @FXML
+    private void PayClicked(MouseEvent event) {}
+
+    @FXML
+    private void RecieptClicked(MouseEvent event) {}
+
+    @FXML
+    private void RemoveClicked(MouseEvent event) {    OrderItem selectedItem = OrdersTable.getSelectionModel().getSelectedItem();
+
+        if (selectedItem != null) {
+            // Remove the selected item from the OrdersTable
+            OrdersTable.getItems().remove(selectedItem);
+        } else {
+            // If no item is selected, show an alert
+            showAlert("Error", "Please select an item to remove");
+        }
+    }
+
+
 }
