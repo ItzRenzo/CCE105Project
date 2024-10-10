@@ -47,3 +47,19 @@
     -fx-background-color: linear-gradient(to right, #FF0000, #990000); /* Red background for individual column headers */
     -fx-text-fill: white;          /* Optional: White text color */
 }
+
+/* Make TabPane tabs invisible */
+.tab-pane .tab-header-area {
+    -fx-background-color: transparent;  /* Transparent background */
+    -fx-padding: 0;  /* No padding */
+    -fx-pref-height: 0;  /* Minimized height */
+    -fx-max-height: 0;  /* Max height reduced to 0 */
+}
+
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: transparent;  /* Transparent tab background */
+    -fx-text-fill: transparent;         /* Hide the tab text */
+    -fx-padding: 0;
+    -fx-min-width: 0;
+    -fx-max-width: 0;
+}

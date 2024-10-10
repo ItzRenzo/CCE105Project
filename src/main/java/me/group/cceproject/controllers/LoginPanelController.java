@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AdminPanelController {
+public class LoginPanelController {
 
     @FXML
     private TextField Username; // FXML ID for the TextField
@@ -38,11 +38,8 @@ public class AdminPanelController {
 
     private void AdminLoad(String AdminType, MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/Orderout.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/AdminMain.fxml"));
             Parent AdminRoot = loader.load();
-
-            AdminController adminController = loader.getController();
-            adminController.setAdminType(AdminType);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene AdminScene = new Scene(AdminRoot);

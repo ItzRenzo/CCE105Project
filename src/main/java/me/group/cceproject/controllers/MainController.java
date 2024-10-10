@@ -25,7 +25,7 @@ public class MainController {
     private void logoclicked(MouseEvent event){
         try {
             // Load the FXML file for the login panel
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/AdminPanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/LoginPanel.fxml"));
             Parent loginPanelRoot = loader.load();
 
             // Get the current stage from the event source
