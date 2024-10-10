@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,7 +22,8 @@ import java.io.IOException;
 public class OrderMenuController {
     @FXML
     private Text orderTypeLabel;
-
+    @FXML
+    private Button Cancel;
     @FXML
     private AnchorPane BurgerPane;
 
@@ -222,7 +224,24 @@ public class OrderMenuController {
         }
     }
 
-    public void setAdminType(String adminType) {
+    public void CancelClicked(MouseEvent event) throws IOException {
 
+        // Clear the table by clearing the staticOrderItems
+        if (staticOrderItems != null) {
+            staticOrderItems.clear(); // This clears the table
+        }
+
+        // Load the main screen
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/Main.fxml"));
+        Parent mainRoot = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene mainScene = new Scene(mainRoot);
+        stage.setScene(mainScene);
+        stage.show();
     }
+
+
+
+
 }
+
