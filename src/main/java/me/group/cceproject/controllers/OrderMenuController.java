@@ -160,6 +160,28 @@ public class OrderMenuController {
         loadMealAddons(mealName, mealPrice, imagePath, foodCode, event);
     }
 
+    // Cheesy Burger/B2
+    @FXML
+    public void B2Clicked(MouseEvent event) {
+        String mealName = "Cheesy Burger";
+        String mealPrice = "₱ 129";
+        String imagePath = "B2.png";
+        String foodCode = "B2";
+
+        loadMealAddons(mealName, mealPrice, imagePath, foodCode, event);
+    }
+
+    // Whopper/B3
+    @FXML
+    public void B3Clicked(MouseEvent event) {
+        String mealName = "Whopper";
+        String mealPrice = "₱ 199";
+        String imagePath = "B3.png";
+        String foodCode = "B3";
+
+        loadMealAddons(mealName, mealPrice, imagePath, foodCode, event);
+    }
+
     // Chicken Wings Category
     // Spicy Chicken Wings/C1
     @FXML
@@ -194,6 +216,11 @@ public class OrderMenuController {
 
     @FXML
     private void PayforOrderClicked(MouseEvent event) {
+        if (staticOrderItems == null || staticOrderItems.isEmpty()) {
+            showAlert("No Order", "Please add items to your order before proceeding to payment.");
+            return;  // Do not proceed if no items have been added
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/PayOrder.fxml"));
             Parent payOrderRoot = loader.load();
@@ -207,6 +234,7 @@ public class OrderMenuController {
             System.err.println("Error returning to pay order menu: " + e.getMessage());
         }
     }
+
 
     @FXML
     private void ViewCartClicked(MouseEvent event) {
@@ -239,8 +267,11 @@ public class OrderMenuController {
         stage.show();
     }
 
-
-
-
+    private void showAlert(String title, String content) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }
 

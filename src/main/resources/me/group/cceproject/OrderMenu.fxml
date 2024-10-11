@@ -79,8 +79,42 @@
                   </Text>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="180.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
-            <AnchorPane layoutX="329.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
+            <AnchorPane fx:id="B2" layoutX="180.0" layoutY="24.0" onMouseClicked="#B2Clicked" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;">
+               <children>
+                  <ImageView fx:id="B1Picture1" fitHeight="85.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/B2.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="B2Name" layoutX="13.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cheesy Burger">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="C1Price1" layoutX="42.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱ 129">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children></AnchorPane>
+            <AnchorPane fx:id="B3" layoutX="329.0" layoutY="24.0" onMouseClicked="#B3Clicked" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;">
+               <children>
+                  <ImageView fx:id="B1Picture11" fitHeight="78.0" fitWidth="108.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/B3.png" />
+                     </image>
+                  </ImageView>
+                  <Text fx:id="B2Name1" layoutX="29.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Whopper">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="C1Price11" layoutX="42.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱ 199">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children></AnchorPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="ChickenWingsPane" layoutX="196.0" layoutY="124.0" prefHeight="410.0" prefWidth="479.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; visibility: false;">
@@ -103,8 +137,6 @@
                      </font>
                   </Text>
                </children></AnchorPane>
-            <AnchorPane layoutX="180.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
-            <AnchorPane layoutX="329.0" layoutY="24.0" prefHeight="120.0" prefWidth="120.0" style="-fx-background-color: #D9D9D9;" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="25.0" layoutY="549.0" prefHeight="164.0" prefWidth="650.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">

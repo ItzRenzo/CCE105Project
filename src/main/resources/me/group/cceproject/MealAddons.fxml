@@ -105,9 +105,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <Button layoutX="90.0" layoutY="160.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="-" />
-            <Button layoutX="194.0" layoutY="160.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="+" />
-            <TextField fx:id="QuantityNumber" alignment="CENTER" layoutX="120.0" layoutY="160.0" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: DB383D; -fx-border-radius: 5;" text="1" />
+            <TextField fx:id="QuantityNumber" alignment="CENTER" layoutX="88.0" layoutY="159.0" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: DB383D; -fx-border-radius: 5;" text="1" />
             <AnchorPane fx:id="ChocolatePiePane" layoutX="120.0" layoutY="47.0" onMouseClicked="#CPClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
