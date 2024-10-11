@@ -226,7 +226,6 @@ public class OrderMenuController {
 
     public void CancelClicked(MouseEvent event) throws IOException {
 
-        // Clear the table by clearing the staticOrderItems
         if (staticOrderItems != null) {
             staticOrderItems.clear(); // This clears the table
         }

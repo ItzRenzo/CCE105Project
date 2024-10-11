@@ -4,9 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -14,6 +19,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
+import static me.group.cceproject.controllers.OrderMenuController.staticOrderItems;
 
 public class AdminMainController {
 
@@ -502,6 +509,17 @@ public class AdminMainController {
         }
     }
 
+    @FXML
+    private void SignOutClicked(MouseEvent event) throws IOException {
+        if (staticOrderItems != null) {
+            staticOrderItems.clear();
+        }
 
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/me/group/cceproject/StartMenu.fxml"));
+        Parent mainRoot = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene mainScene = new Scene(mainRoot);
+        stage.setScene(mainScene);
+        stage.show();
+    }
 }

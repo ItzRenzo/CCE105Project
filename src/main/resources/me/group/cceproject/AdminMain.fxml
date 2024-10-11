@@ -43,7 +43,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="14.0" layoutY="401.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: #FF0000;" text="Sign Out" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="401.0" mnemonicParsing="false" onMouseClicked="#SignOutClicked" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: #FF0000;" text="Sign Out" textFill="WHITE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -167,7 +167,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button fx:id="RecieptButton" layoutX="14.0" layoutY="633.0" mnemonicParsing="false" onMouseClicked="#RecieptClicked" prefHeight="56.0" prefWidth="298.0" style="-fx-background-color: #00B14F;" text="Reciept" textFill="WHITE">
+                        <Button fx:id="RecieptButton" layoutX="14.0" layoutY="633.0" mnemonicParsing="false" onMouseClicked="#RecieptClicked" prefHeight="56.0" prefWidth="298.0" style="-fx-background-color: #00B14F;" text="Receipt" textFill="WHITE">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
