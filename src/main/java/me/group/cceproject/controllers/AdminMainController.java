@@ -73,8 +73,6 @@ public class AdminMainController {
     @FXML
     private TableColumn<OrderSummary, String> orderStatusColumn;
     @FXML
-    private ComboBox<String> ProductIDBox;
-    @FXML
     private TableView<OrderItem> OrdersTable;
     @FXML
     private TableColumn<OrderItem, String> ProductID;
@@ -114,8 +112,6 @@ public class AdminMainController {
         productPrices.put("P003", 200.0);
 
         // Populate the ComboBox with product IDs
-        ObservableList<String> productIds = FXCollections.observableArrayList(productPrices.keySet());
-        ProductIDBox.setItems(productIds);
         inputOrderNumber.setOnAction(event -> loadOrderDetails());
         OrdersTable.getItems().addListener((ListChangeListener<OrderItem>) change -> updateTotalPrice());
 
@@ -349,31 +345,6 @@ public class AdminMainController {
     }
 
     private Map<String, Double> productPrices = new HashMap<>();
-    @FXML
-    private void AddClicked(MouseEvent event) {
-        String selectedProductID = ProductIDBox.getSelectionModel().getSelectedItem();
-        if (selectedProductID == null) {
-            showAlert("Error", "Please select a product");
-            return;
-        }
-
-        Double productPrice = productPrices.get(selectedProductID);  // Retrieve the actual price
-        int productQuantity;
-
-        try {
-            productQuantity = Integer.parseInt(QuantityField.getText());
-        } catch (NumberFormatException e) {
-            showAlert("Error", "Please enter a valid number for quantity");
-            return;
-        }
-
-        OrderItem newItem = new OrderItem(selectedProductID, "Product Name " + selectedProductID, productPrice.toString(), productQuantity);
-        OrdersTable.getItems().add(newItem);
-        OrdersTable.refresh();
-
-        // Call updateTotalPrice to refresh the total value
-        updateTotalPrice();
-    }
 
     @FXML
     private void QueueClicked(MouseEvent event) {
@@ -494,23 +465,6 @@ public class AdminMainController {
             showAlert("Success", "Receipt saved as " + fileName);
         } catch (IOException e) {
             showAlert("Error", "Failed to save receipt: " + e.getMessage());
-        }
-    }
-
-
-
-
-    @FXML
-    private void RemoveClicked(MouseEvent event) {
-        OrderItem selectedItem = OrdersTable.getSelectionModel().getSelectedItem();
-
-        if (selectedItem != null) {
-            OrdersTable.getItems().remove(selectedItem);
-            OrdersTable.refresh();
-            // Call updateTotalPrice to refresh the total value
-            updateTotalPrice();
-        } else {
-            showAlert("Error", "Please select an item to remove");
         }
     }
 
