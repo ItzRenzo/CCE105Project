@@ -394,7 +394,50 @@ public class AdminMainController {
 
 
     @FXML
-    private void RecieptClicked(MouseEvent event) {}
+    private void RecieptClicked(MouseEvent event) {
+        String orderNumber = OrderNumberInput.getText().trim();  // Get the order number
+        if (orderNumber.isEmpty()) {
+            showAlert("Error", "Please enter an order number");
+            return;
+        }
+
+        Stack<OrderItem> orderStack = orderStacks.get(orderNumber);  // Get the items for this order
+        if (orderStack == null || orderStack.isEmpty()) {
+            showAlert("Error", "No items found for order number: " + orderNumber);
+            return;
+        }
+
+        // Prepare the receipt content
+        StringBuilder receiptContent = new StringBuilder();
+        receiptContent.append("Order Receipt\n");
+        receiptContent.append("Order Number: ").append(orderNumber).append("\n");
+        receiptContent.append("======================================\n");
+
+        // Loop through the order items and add to receipt
+        double totalPrice = 0.0;
+        for (OrderItem item : orderStack) {
+            String mealName = item.getMealName();
+            double price = Double.parseDouble(item.getMealPrice().replaceAll("[^\\d.]", ""));
+            int quantity = item.getQuantity();
+            double itemTotal = price * quantity;
+            totalPrice += itemTotal;
+
+            receiptContent.append(String.format("%-20s %5d x ₱%.2f = ₱%.2f\n", mealName, quantity, price, itemTotal));
+        }
+
+        receiptContent.append("======================================\n");
+        receiptContent.append(String.format("Total: ₱%.2f\n", totalPrice));
+
+        // Write receipt to a file named after the order number
+        String fileName = "Receipt_" + orderNumber + ".txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write(receiptContent.toString());
+            showAlert("Success", "Receipt saved as " + fileName);
+        } catch (IOException e) {
+            showAlert("Error", "Failed to save receipt: " + e.getMessage());
+        }
+    }
+
 
     @FXML
     private void RemoveClicked(MouseEvent event) {
