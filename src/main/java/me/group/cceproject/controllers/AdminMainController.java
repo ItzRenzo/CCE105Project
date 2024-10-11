@@ -433,7 +433,7 @@ public class AdminMainController {
 
 
     @FXML
-    private void RecieptClicked(MouseEvent event) {
+    private void ReceiptClicked(MouseEvent event) {
         String orderNumber = OrderNumberInput.getText().trim();  // Get the order number
         if (orderNumber.isEmpty()) {
             showAlert("Error", "Please enter an order number");
@@ -446,10 +446,14 @@ public class AdminMainController {
             return;
         }
 
+        // Get the order type (Dine In or Take Out) from the OrderMenuController
+        String orderType = OrderMenuController.getOrderType();
+
         // Prepare the receipt content
         StringBuilder receiptContent = new StringBuilder();
-        receiptContent.append("Order Receipt\n");
+        receiptContent.append("Kentucky Avenue \nOrder Receipt\n");
         receiptContent.append("Order Number: ").append(orderNumber).append("\n");
+        receiptContent.append("Order Type: ").append(orderType).append("\n");  // Include order type
         receiptContent.append("======================================\n");
 
         // Loop through the order items and add to receipt
@@ -492,6 +496,7 @@ public class AdminMainController {
             showAlert("Error", "Failed to save receipt: " + e.getMessage());
         }
     }
+
 
 
 

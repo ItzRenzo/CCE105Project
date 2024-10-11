@@ -21,8 +21,6 @@ import java.io.IOException;
 
 public class OrderMenuController {
     @FXML
-    private Text orderTypeLabel;
-    @FXML
     private Button Cancel;
     @FXML
     private AnchorPane BurgerPane;
@@ -51,7 +49,9 @@ public class OrderMenuController {
 
     private static OrderMenuController instance;
 
-    private static String staticOrderType;
+    @FXML
+    private Text orderTypeLabel;
+    static String staticOrderType;
 
     @FXML
     public void initialize() {
@@ -123,15 +123,15 @@ public class OrderMenuController {
         updateOrderTypeLabel();
     }
 
+    // Update the label in the UI to show whether it's Dine In or Take Out
     private void updateOrderTypeLabel() {
         if (orderTypeLabel != null) {
-            orderTypeLabel.setText("Your Order ( " + staticOrderType + " ):");
+            orderTypeLabel.setText("Your Order (" + staticOrderType + "):");
         } else {
             System.err.println("Unable to set order type label. Label is null.");
         }
     }
 
-    // Get the current order type
     public static String getOrderType() {
         return staticOrderType;
     }

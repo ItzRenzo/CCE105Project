@@ -77,7 +77,9 @@ public class EndController {
             return;
         }
 
+        // Get the order number and the order type
         int orderNumber = Integer.parseInt(OrderNumber.getText());
+        String orderType = OrderMenuController.getOrderType();  // Retrieve the order type (Dine In or Take Out)
         double totalPrice = orderItems.stream()
                 .mapToDouble(item -> Double.parseDouble(item.getMealPrice().replaceAll("[^\\d.]", "")) * item.getQuantity())
                 .sum();
@@ -85,6 +87,8 @@ public class EndController {
         // Using BufferedWriter for efficient writing
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ORDER_FILE, true))) {
             writer.write(String.format("%04d: Order Items", orderNumber));
+            writer.newLine();
+            writer.write("  Order Type: " + orderType);  // Write the order type (Dine In or Take Out)
             writer.newLine();
             for (OrderItem item : orderItems) {
                 writer.write("  Food Code: " + item.getFoodCode());
@@ -147,5 +151,4 @@ public class EndController {
             e.printStackTrace();
         }
     }
-
 }
