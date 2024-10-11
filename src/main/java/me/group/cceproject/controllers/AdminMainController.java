@@ -124,10 +124,11 @@ public class AdminMainController {
             OrderSummary currentOrder = null;
             Stack<OrderItem> currentStack = null;
 
-            for (String line : lines) {
-                line = line.trim();
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i).trim();
                 if (line.isEmpty()) continue;
 
+                // When a new order starts
                 if (line.matches("\\d{4}: Order Items")) {
                     if (currentOrder != null && currentStack != null) {
                         orders.add(currentOrder);
@@ -137,25 +138,56 @@ public class AdminMainController {
                     String orderNumber = line.split(":")[0];
                     currentOrder = new OrderSummary(orderNumber);
                     currentStack = new Stack<>();
-                } else if (line.startsWith("Food Code:")) {
+                }
+                // Parsing food code
+                else if (line.startsWith("Food Code:")) {
                     OrderItem item = new OrderItem("", "", line.substring(10).trim(), 0);
                     if (currentStack != null) {
-                        currentStack.push(item);  // Add items to stack
+                        currentStack.push(item);  // Add item to stack
                     }
-                } else if (line.startsWith("Meal Name:") && !currentStack.isEmpty()) {
-                    currentStack.peek().setMealName(line.substring(10).trim());
-                } else if (line.startsWith("Price:") && !currentStack.isEmpty()) {
+                }
+                // Parsing meal name (which could include addons or drinks)
+                else if (line.startsWith("Meal Name:") && !currentStack.isEmpty()) {
+                    String mealName = line.substring(10).trim();
+
+                    // Continue to append addons/drinks as long as the next lines aren't "Price:" or "Quantity:"
+                    StringBuilder fullMealName = new StringBuilder(mealName);
+
+                    // Look ahead to check if the next lines are addons/drinks
+                    for (int j = i + 1; j < lines.size(); j++) {
+                        String nextLine = lines.get(j).trim();
+
+                        // Stop appending if we encounter a price, quantity, or total indicator
+                        if (nextLine.startsWith("Price:") || nextLine.startsWith("Quantity:") || nextLine.startsWith("Total Price:")) {
+                            i = j - 1;  // Move i to where parsing left off
+                            break;
+                        }
+                        // Otherwise, it's an addon or drink
+                        fullMealName.append("\n").append(nextLine.trim());
+                    }
+
+                    // Set the full meal name in the current order item
+                    currentStack.peek().setMealName(fullMealName.toString().trim());
+                }
+                // Parsing price
+                else if (line.startsWith("Price:") && !currentStack.isEmpty()) {
                     currentStack.peek().setMealPrice(line.substring(6).trim());
-                } else if (line.startsWith("Quantity:") && !currentStack.isEmpty()) {
+                }
+                // Parsing quantity
+                else if (line.startsWith("Quantity:") && !currentStack.isEmpty()) {
                     currentStack.peek().setQuantity(Integer.parseInt(line.substring(9).trim()));
-                } else if (line.startsWith("Total Price:") && currentOrder != null) {
+                }
+                // Parsing total price for the order
+                else if (line.startsWith("Total Price:") && currentOrder != null) {
                     currentOrder.setOrderTotal(line.substring(12).trim());
-                } else if (line.startsWith("Status:") && currentOrder != null) {
+                }
+                // Parsing status
+                else if (line.startsWith("Status:") && currentOrder != null) {
                     currentOrder.setOrderStatus(line.substring(7).trim());
                 }
             }
 
-            // Add the last order
+            // Add the last order if it exists
             if (currentOrder != null && currentStack != null) {
                 orders.add(currentOrder);
                 orderQueue.offer(currentOrder);

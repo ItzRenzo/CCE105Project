@@ -26,3 +26,35 @@
   Total Price: 760.00
   Status: In Progress
 
+0006: Order Items
+  Food Code: B1
+  Meal Name: Yumburger
+Mountain Dew (Small) 
+Red Velvet
+  Price: ₱ 158.00
+  Quantity: 1
+  Total Price: 158.00
+  Status: Pending
+
+0007: Order Items
+  Food Code: B1
+  Meal Name: Yumburger
+Mountain Dew (Small) 
+Red Velvet
+  Price: ₱ 158.00
+  Quantity: 1
+  Food Code: B1
+  Meal Name: Yumburger
+Sprite (Small) 
+Chocolate Fudge
+  Price: ₱ 138.00
+  Quantity: 1
+  Food Code: C1
+  Meal Name: Spicy Chicken Wings
+Sprite (Small) 
+Red Velvet
+  Price: ₱ 218.00
+  Quantity: 1
+  Total Price: 514.00
+  Status: Pending
+
