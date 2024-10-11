@@ -109,6 +109,7 @@ public class AdminMainController {
         // Populate the ComboBox with product IDs
         ObservableList<String> productIds = FXCollections.observableArrayList(productPrices.keySet());
         ProductIDBox.setItems(productIds);
+        inputOrderNumber.setOnAction(event -> loadOrderDetails());
         OrdersTable.getItems().addListener((ListChangeListener<OrderItem>) change -> updateTotalPrice());
 
         // Update the total price on startup
@@ -168,26 +169,27 @@ public class AdminMainController {
         }
     }
 
-    // Load the order details (total price and status) when an order number is entered
     private void loadOrderDetails() {
-        String orderNumberInput = inputOrderNumber.getText();
+        String orderNumberInput = inputOrderNumber.getText().trim();  // Get the entered order number
         if (orderNumberInput.isEmpty()) {
-            System.out.println("No order number entered.");
+            showAlert("Error", "Please enter an order number");
             return;
         }
 
-        // Find the order in the TableView by matching the order number
+        // Loop through the orders in the orderTableView to find the matching order
         for (OrderSummary order : orderTableView.getItems()) {
             if (order.getOrderNumber().equals(orderNumberInput)) {
-                // Update the UI with the selected order's total and status
-                orderTotalText.setText(order.getOrderTotal());
+                // Update the orderTotalText with the total price of the selected order
+                orderTotalText.setText(String.format("₱%.2f", Double.parseDouble(order.getOrderTotal())));
+
+                // Update the orderStatusComboBox with the current status of the order
                 orderStatusComboBox.setValue(order.getOrderStatus());
-                return;
+                return;  // Exit after updating the UI with the found order's details
             }
         }
 
         // If no matching order is found
-        System.out.println("Order number " + orderNumberInput + " not found.");
+        showAlert("Information", "Order number " + orderNumberInput + " not found.");
     }
 
     // This method will be called when the "Update Status" button is clicked
