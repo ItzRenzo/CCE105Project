@@ -20,17 +20,11 @@
    <children>
       <AnchorPane layoutX="21.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 18;">
          <children>
-            <Label layoutX="48.0" layoutY="100.0" text="Welcome,">
-               <font>
-                  <Font name="Century Gothic Bold" size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="38.0" layoutY="145.0" text="UN: Admin">
-               <font>
-                  <Font name="Century Gothic Bold" size="21.0" />
-               </font>
-            </Label>
-
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo_transparent.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="21.0" layoutY="263.0" prefHeight="458.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 18;">

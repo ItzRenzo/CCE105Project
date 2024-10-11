@@ -52,13 +52,13 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <Button fx:id="SmallButton" layoutX="88.0" layoutY="168.0" mnemonicParsing="false" onMouseClicked="#SmallButtonClicked" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #DB383D; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Small" textFill="WHITE">
+            <Button fx:id="SmallButton" layoutX="89.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#SmallButtonClicked" prefHeight="43.0" prefWidth="104.0" style="-fx-background-color: #DB383D; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Small&#10;(Free)" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="MediumButton" layoutX="221.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#MediumButtonClicked" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Medium" />
-            <Button fx:id="LargeButton" layoutX="357.0" layoutY="170.0" mnemonicParsing="false" onMouseClicked="#LargeButtonClicked" prefHeight="29.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Large" />
+            <Button fx:id="MediumButton" layoutX="221.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#MediumButtonClicked" prefHeight="43.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Medium&#10;₱ 20" textAlignment="CENTER" />
+            <Button fx:id="LargeButton" layoutX="358.0" layoutY="163.0" mnemonicParsing="false" onMouseClicked="#LargeButtonClicked" prefHeight="43.0" prefWidth="104.0" style="-fx-background-color: #FFFFFF; -fx-border-color: DB383D; -fx-border-radius: 5;" text="Large&#10;₱ 40" textAlignment="CENTER" />
             <AnchorPane fx:id="SpritePane" layoutX="118.0" layoutY="48.0" onMouseClicked="#SpriteClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
@@ -88,11 +88,16 @@
             </Text>
             <AnchorPane fx:id="ChocolateFudgePane" layoutX="14.0" layoutY="47.0" onMouseClicked="#CFClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="78.0" fitWidth="77.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/sundae.png" />
                      </image>
                   </ImageView>
+                  <Text layoutX="36.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱ 39">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
             <Text layoutX="16.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quantity:">
@@ -105,20 +110,30 @@
             <TextField fx:id="QuantityNumber" alignment="CENTER" layoutX="120.0" layoutY="160.0" prefHeight="26.0" prefWidth="66.0" style="-fx-border-color: DB383D; -fx-border-radius: 5;" text="1" />
             <AnchorPane fx:id="ChocolatePiePane" layoutX="120.0" layoutY="47.0" onMouseClicked="#CPClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/creampie.png" />
                      </image>
                   </ImageView>
+                  <Text layoutX="36.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱ 49">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="RedVelvetPane" layoutX="225.0" layoutY="44.0" onMouseClicked="#RVClicked" prefHeight="100.0" prefWidth="100.0">
                <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="17.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="90.0" fitWidth="52.0" layoutX="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/redvelvet.png" />
                      </image>
                   </ImageView>
+                  <Text layoutX="36.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="₱ 59">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="NoThanksPane" layoutX="325.0" layoutY="44.0" onMouseClicked="#NTClicked" prefHeight="100.0" prefWidth="100.0">
