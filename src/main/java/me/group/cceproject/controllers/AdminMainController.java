@@ -428,6 +428,22 @@ public class AdminMainController {
         receiptContent.append("======================================\n");
         receiptContent.append(String.format("Total: ₱%.2f\n", totalPrice));
 
+        // Get the amount paid by the customer
+        String amountPaidText = AmountTextField.getText();
+        if (amountPaidText.isEmpty()) {
+            showAlert("Error", "Please enter the amount paid by the customer.");
+            return;
+        }
+        double amountPaid = Double.parseDouble(amountPaidText);
+
+        // Get the change (this should already be calculated when the Pay button is clicked)
+        String changeText = ChangeText.getText().replaceAll("[^\\d.]", "");  // Remove any currency symbols
+        double changeAmount = Double.parseDouble(changeText);
+
+        // Add the amount paid and change to the receipt
+        receiptContent.append(String.format("Amount Paid: ₱%.2f\n", amountPaid));
+        receiptContent.append(String.format("Change: ₱%.2f\n", changeAmount));
+
         // Write receipt to a file named after the order number
         String fileName = "Receipt_" + orderNumber + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
@@ -437,6 +453,7 @@ public class AdminMainController {
             showAlert("Error", "Failed to save receipt: " + e.getMessage());
         }
     }
+
 
 
     @FXML
